@@ -23,8 +23,11 @@ namespace Specflow.ApiTests
                 HttpRequestMessage = new HttpRequestMessage();
         }
 
-
-
+        [Given(@"I am using the base url (.*)")]
+        public void GivenIAmUsingTheBaseUrl(string baseUrl)
+        {
+            HttpClient.BaseAddress = new Uri(baseUrl);
+        }
         [Given(@"I make a (.*) request with url parameters")]
         public void GivenIMakeAGETRequestWithUrlParameters(string verb, Table table)
         {
@@ -38,6 +41,7 @@ namespace Specflow.ApiTests
             @params = @params.Remove(@params.Length - 1);
             UrlParameters = @params;
         }
+
 
         [When(@"I call the api")]
         public void WhenICallTheApi()
@@ -69,5 +73,11 @@ namespace Specflow.ApiTests
         {
             Assert.That(HttpResponseMessage.Content.Headers.ContentType.MediaType, Is.EqualTo(contentType));
         }
+        [Then(@"the api response should have a content type of")]
+        public void ThenTheApiResponseShouldHaveAContentTypeOf()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
     }
 }

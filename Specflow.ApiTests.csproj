@@ -53,7 +53,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApiTest.feature</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ApiTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
