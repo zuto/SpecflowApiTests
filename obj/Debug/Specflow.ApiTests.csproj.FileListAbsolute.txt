@@ -1,0 +1,13 @@
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\Specflow.ApiTests.dll.config
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\Specflow.ApiTests.dll
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\Specflow.ApiTests.pdb
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\nunit.framework.dll
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\TechTalk.SpecFlow.dll
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\nunit.framework.xml
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\obj\Debug\Specflow.ApiTests.csprojResolveAssemblyReference.cache
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\obj\Debug\Specflow.ApiTests.dll
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\obj\Debug\Specflow.ApiTests.pdb
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\Default.srprofile
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\SpecRun.SpecFlowPlugin.dll
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\TechTalk.SpecRun.dll
+C:\Development\Specflow.ApiTests\Specflow.ApiTests\bin\Debug\SpecRun.SpecFlowPlugin.pdb

@@ -12,8 +12,9 @@ namespace Specflow.ApiTests
         public static HttpRequestMessage HttpRequestMessage { get; set; }
         public static HttpResponseMessage HttpResponseMessage { get; set; }
         private static string UrlParameters;
+        private static string UrlRoute;
 
-        [BeforeScenario("ApiTests")]
+        [BeforeScenario("ApiTest")]
         public void BeforeApiTests()
         {
             if (HttpClient == null)
@@ -28,15 +29,26 @@ namespace Specflow.ApiTests
         {
             HttpClient.BaseAddress = new Uri(baseUrl);
         }
-        [Given(@"I make a (.*) request with url parameters")]
-        public void GivenIMakeAGETRequestWithUrlParameters(string verb, Table table)
+        [Given(@"I make a (.*) request with url parameters for (.*)")]
+        public void GivenIMakeARequestWithUrlParametersForCustomer(string verb, string route, Table table)
         {
-            var method = (HttpMethod)Enum.Parse(typeof(HttpMethod), verb);
-            HttpRequestMessage.Method = method;
+            UrlRoute = route;
+            GivenIMakeARequestWithUrlParameters(verb, table);
+        }
+        [Given(@"I supply the header (.*) with value (.*)")]
+        public void GivenISupplyTheHeaderAcceptWithValueApplicationJson(string headerName, string headerValue)
+        {
+            HttpRequestMessage.Headers.Add(headerName, headerValue);
+        }
+
+        [Given(@"I make a (.*) request with url parameters")]
+        public void GivenIMakeARequestWithUrlParameters(string verb, Table table)
+        {
+            HttpRequestMessage.Method = new HttpMethod(verb);
             var @params = "?";
             foreach (var keyValuePair in table.Rows[0])
             {
-                @params += keyValuePair.Key + "=" + keyValuePair.Value +"&";
+                @params += keyValuePair.Key + "=" + keyValuePair.Value + "&";
             }
             @params = @params.Remove(@params.Length - 1);
             UrlParameters = @params;
@@ -46,12 +58,16 @@ namespace Specflow.ApiTests
         [When(@"I call the api")]
         public void WhenICallTheApi()
         {
+            HttpRequestMessage.RequestUri = new Uri(UrlRoute + UrlParameters, UriKind.Relative);
             HttpResponseMessage = HttpClient.SendAsync(HttpRequestMessage).Result;
+            Console.WriteLine(HttpRequestMessage);
+            Console.WriteLine(HttpResponseMessage);
+
         }
         [Then(@"the api should return a response")]
         public void ThenTheApiShouldReturnAResponse()
         {
-            ScenarioContext.Current.Pending();
+            //nothing to do yet
         }
         [Then(@"the status code is (.*)")]
         public void ThenTheStatusCodeIs(int statusCode)
@@ -73,11 +89,5 @@ namespace Specflow.ApiTests
         {
             Assert.That(HttpResponseMessage.Content.Headers.ContentType.MediaType, Is.EqualTo(contentType));
         }
-        [Then(@"the api response should have a content type of")]
-        public void ThenTheApiResponseShouldHaveAContentTypeOf()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
     }
 }

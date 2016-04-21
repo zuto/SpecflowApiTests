@@ -17,9 +17,105 @@ namespace Specflow.ApiTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [TechTalk.SpecRun.FeatureAttribute("Testing the example Api", SourceFile="ApiTest.feature", SourceLine=0)]
+    public partial class TestingTheExampleApiFeature
+    {
+        
+        private TechTalk.SpecFlow.ITestRunner testRunner;
+        
+#line 1 "ApiTest.feature"
+#line hidden
+        
+        [TechTalk.SpecRun.FeatureInitialize()]
+        public virtual void FeatureSetup()
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            testRunner.OnFeatureStart(featureInfo);
+        }
+        
+        [TechTalk.SpecRun.FeatureCleanup()]
+        public virtual void FeatureTearDown()
+        {
+            testRunner.OnFeatureEnd();
+            testRunner = null;
+        }
+        
+        public virtual void TestInitialize()
+        {
+        }
+        
+        [TechTalk.SpecRun.ScenarioCleanup()]
+        public virtual void ScenarioTearDown()
+        {
+            testRunner.OnScenarioEnd();
+        }
+        
+        public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        {
+            testRunner.OnScenarioStart(scenarioInfo);
+        }
+        
+        public virtual void ScenarioCleanup()
+        {
+            testRunner.CollectScenarioErrors();
+        }
+        
+        public virtual void FeatureBackground()
+        {
+#line 2
+#line 3
+ testRunner.Given("I am using the base url http://www.thomas-bayer.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("When calling api", new string[] {
+                "ApiTest"}, SourceLine=5)]
+        public virtual void WhenCallingApi()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When calling api", new string[] {
+                        "ApiTest"});
+#line 6
+this.ScenarioSetup(scenarioInfo);
+#line 2
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "param1",
+                        "param2",
+                        "param3"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "1"});
+#line 7
+ testRunner.Given("I make a GET request with url parameters for /sqlrest/CUSTOMER", ((string)(null)), table1, "Given ");
+#line 10
+ testRunner.And("I supply the header accept with value application/json", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+ testRunner.And("I supply the header content-type with value application/json", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+ testRunner.When("I call the api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 13
+ testRunner.Then("the api should return a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+ testRunner.And("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.TestRunCleanup()]
+        public virtual void TestRunCleanup()
+        {
+            TechTalk.SpecFlow.TestRunnerManager.GetTestRunner().OnTestRunEnd();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Testing the example Api")]
-    public partial class TestingTheExampleApiFeature
+    public partial class TestingTheExampleApiFeature_NUnit
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -67,7 +163,7 @@ namespace Specflow.ApiTests
         {
 #line 2
 #line 3
- testRunner.Given("I am using the base url http://example.api.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am using the base url http://www.thomas-bayer.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
@@ -92,17 +188,17 @@ this.FeatureBackground();
                         "1",
                         "1"});
 #line 7
- testRunner.Given("I make a GET request with url parameters", ((string)(null)), table1, "Given ");
+ testRunner.Given("I make a GET request with url parameters for /sqlrest/CUSTOMER", ((string)(null)), table1, "Given ");
 #line 10
- testRunner.When("I call the api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I supply the header accept with value application/json", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.Then("the api should return a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I supply the header content-type with value application/json", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.And("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I call the api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 13
- testRunner.And("the status code a success code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the api should return a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 14
- testRunner.And("the api response should have a content type of", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
