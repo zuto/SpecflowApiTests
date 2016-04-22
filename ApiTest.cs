@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Configuration;
+using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using TechTalk.SpecFlow;
 
 namespace Specflow.ApiTests
@@ -11,8 +14,8 @@ namespace Specflow.ApiTests
         public static HttpClient HttpClient { get; set; }
         public static HttpRequestMessage HttpRequestMessage { get; set; }
         public static HttpResponseMessage HttpResponseMessage { get; set; }
-        private static string UrlParameters;
-        private static string UrlRoute;
+        private static string _urlParameters;
+        private static string _urlRoute;
 
         [BeforeScenario("ApiTest")]
         public void BeforeApiTests()
@@ -24,25 +27,21 @@ namespace Specflow.ApiTests
                 HttpRequestMessage = new HttpRequestMessage();
         }
 
-        [Given(@"I am using the base url (.*)")]
+        [Given(@"I am using the base url for (.*)")]
         public void GivenIAmUsingTheBaseUrl(string baseUrl)
         {
             HttpClient.BaseAddress = new Uri(baseUrl);
         }
-        [Given(@"I make a (.*) request with url parameters for (.*)")]
-        public void GivenIMakeARequestWithUrlParametersForCustomer(string verb, string route, Table table)
-        {
-            UrlRoute = route;
-            GivenIMakeARequestWithUrlParameters(verb, table);
-        }
-        [Given(@"I supply the header (.*) with value (.*)")]
-        public void GivenISupplyTheHeaderAcceptWithValueApplicationJson(string headerName, string headerValue)
-        {
-            HttpRequestMessage.Headers.Add(headerName, headerValue);
-        }
 
-        [Given(@"I make a (.*) request with url parameters")]
-        public void GivenIMakeARequestWithUrlParameters(string verb, Table table)
+        [Given(@"I am using the base url from config setting (.*)")]
+        public void GivenIAmUsingTheBaseUrlFromConfigSetting(string configKey)
+        {
+            HttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings[configKey]);
+        }
+        
+
+        [Given(@"I make a (.*) request with url parameters for (.*)")]
+        public void GivenIMakeARequestWithUrlParametersFor(string verb, string path, Table table)
         {
             HttpRequestMessage.Method = new HttpMethod(verb);
             var @params = "?";
@@ -51,14 +50,46 @@ namespace Specflow.ApiTests
                 @params += keyValuePair.Key + "=" + keyValuePair.Value + "&";
             }
             @params = @params.Remove(@params.Length - 1);
-            UrlParameters = @params;
+            _urlParameters = @params;
+            _urlRoute = path;
+        }
+        [Given(@"I supply a request header (.*) with value (.*)")]
+        public void GivenISupplyARequestHeaderWithValue(string headerName, string headerValue)
+        {
+            HttpRequestMessage.Headers.Add(headerName, headerValue);
+        }
+        [Given(@"I set the request content type with StringContent to (.*)")]
+        public void GivenISetTheRequestContentTypeWithStringContentToValue(string value)
+        {
+            HttpRequestMessage.Content = new StringContent(value);
+        }
+
+        [Given(@"I set the request content type with MultipartContent and files")]
+        public void GivenISetTheRequestContentTypeToSomething(Table files)
+        {
+            HttpRequestMessage.Content = new MultipartContent();
+            foreach (var file in files.Rows[0])
+            {
+                var path = file.Value;                
+                path = path.Replace(@"\BinPath\",System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase));                
+                var content = new ByteArrayContent(File.ReadAllBytes(path));
+                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("File") { FileName = path };
+                ((MultipartContent) HttpRequestMessage.Content).Add(content);
+            }
+        }
+
+        [Given(@"I make a (.*) request for (.*)")]
+        public void GivenIMakeARequestWithUrlParameters(string verb, string path)
+        {
+            HttpRequestMessage.Method = new HttpMethod(verb);
+            _urlRoute = path;
         }
 
 
         [When(@"I call the api")]
         public void WhenICallTheApi()
         {
-            HttpRequestMessage.RequestUri = new Uri(UrlRoute + UrlParameters, UriKind.Relative);
+            HttpRequestMessage.RequestUri = new Uri(_urlRoute + _urlParameters, UriKind.Relative);
             HttpResponseMessage = HttpClient.SendAsync(HttpRequestMessage).Result;
             Console.WriteLine(HttpRequestMessage);
             Console.WriteLine(HttpResponseMessage);
