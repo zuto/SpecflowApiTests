@@ -17,9 +17,10 @@ namespace Specflow.ApiTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Testing the example Api", SourceFile="ApiTest.feature", SourceLine=1)]
+    [TechTalk.SpecRun.FeatureAttribute("Testing an example Api", new string[] {
+            "UseMockServer"}, SourceFile="ApiTest.feature", SourceLine=2)]
     [TechTalk.SpecRun.IgnoreAttribute()]
-    public partial class TestingTheExampleApiFeature
+    public partial class TestingAnExampleApiFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,8 +32,9 @@ namespace Specflow.ApiTests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, new string[] {
-                        "Ignore"});
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing an example Api", null, ProgrammingLanguage.CSharp, new string[] {
+                        "Ignore",
+                        "UseMockServer"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,10 +67,32 @@ namespace Specflow.ApiTests
         
         public virtual void FeatureBackground()
         {
-#line 3
 #line 4
- testRunner.Given("I am using the base url from config setting ApiBaseUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+ testRunner.Given("I am using the base url from httpClient", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("When calling api health endpoint", new string[] {
+                "ContractLocal"}, SourceLine=7)]
+        public virtual void WhenCallingApiHealthEndpoint()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When calling api health endpoint", new string[] {
+                        "ContractLocal"});
+#line 8
+this.ScenarioSetup(scenarioInfo);
+#line 4
+this.FeatureBackground();
+#line 9
+    testRunner.Given("I make a GET request for /health", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 10
+    testRunner.When("I call the api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 11
+    testRunner.Then("the api should return a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 12
+    testRunner.And("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.TestRunCleanup()]
@@ -81,9 +105,10 @@ namespace Specflow.ApiTests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Testing the example Api")]
+    [NUnit.Framework.DescriptionAttribute("Testing an example Api")]
     [NUnit.Framework.IgnoreAttribute("Ignored feature")]
-    public partial class TestingTheExampleApiFeature_NUnit
+    [NUnit.Framework.CategoryAttribute("UseMockServer")]
+    public partial class TestingAnExampleApiFeature_NUnit
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -95,8 +120,9 @@ namespace Specflow.ApiTests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, new string[] {
-                        "Ignore"});
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing an example Api", null, ProgrammingLanguage.CSharp, new string[] {
+                        "Ignore",
+                        "UseMockServer"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -130,10 +156,33 @@ namespace Specflow.ApiTests
         
         public virtual void FeatureBackground()
         {
-#line 3
 #line 4
- testRunner.Given("I am using the base url from config setting ApiBaseUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+ testRunner.Given("I am using the base url from httpClient", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When calling api health endpoint")]
+        [NUnit.Framework.CategoryAttribute("ContractLocal")]
+        public virtual void WhenCallingApiHealthEndpoint()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When calling api health endpoint", new string[] {
+                        "ContractLocal"});
+#line 8
+this.ScenarioSetup(scenarioInfo);
+#line 4
+this.FeatureBackground();
+#line 9
+    testRunner.Given("I make a GET request for /health", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 10
+    testRunner.When("I call the api", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 11
+    testRunner.Then("the api should return a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 12
+    testRunner.And("the status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
         }
     }
 }

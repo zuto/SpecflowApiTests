@@ -25,14 +25,20 @@ namespace Specflow.ApiTests
 
             if (HttpRequestMessage == null)
                 HttpRequestMessage = new HttpRequestMessage();
+
+            Console.WriteLine($"Using HttpClient with base url: {HttpClient.BaseAddress}");
         }
 
+        [Given(@"I am using the base url from httpClient")]
+        public void GivenIAmUsingTheBaseUrlFromHttpClient()
+        {
+            //Make sure HttpClient has been swapped out with specific instance
+        }
         [Given(@"I am using the base url for (.*)")]
         public void GivenIAmUsingTheBaseUrl(string baseUrl)
         {
             HttpClient.BaseAddress = new Uri(baseUrl);
         }
-
         [Given(@"I am using the base url from config setting (.*)")]
         public void GivenIAmUsingTheBaseUrlFromConfigSetting(string configKey)
         {
