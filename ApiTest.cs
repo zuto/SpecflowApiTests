@@ -119,5 +119,11 @@ namespace Specflow.ApiTests
         {
             Assert.That(HttpResponseMessage.Content.Headers.ContentType.MediaType, Is.EqualTo(contentType));
         }
+
+        [Then(@"the api response should have content as string (.*)")]
+        public void ThenTheApiResponseShouldHaveContentAsString(string stringContent)
+        {
+            Assert.That(HttpResponseMessage.Content.ReadAsStringAsync().Result, Is.EqualTo(stringContent));
+        }
     }
 }
