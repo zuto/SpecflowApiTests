@@ -69,4 +69,6 @@ the status code a success code
 the status code is not a success code
         
 the api response should have a content type of {contentType}
+
+the api response should have content as string {stringContent}
 ```
