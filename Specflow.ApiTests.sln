@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specflow.ApiTests", "Specflow.ApiTests.csproj", "{0DEB1EB8-992E-4F25-BB7F-783CF84D9ED3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "TestServer\TestServer.csproj", "{7B04DC16-3B17-42BD-BAB7-9A9F5E1EC639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specflow.ApiTest.Tests", "Specflow.ApiTest.Tests\Specflow.ApiTest.Tests.csproj", "{85F6328F-3869-4998-9404-AEAC751F3E42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0DEB1EB8-992E-4F25-BB7F-783CF84D9ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DEB1EB8-992E-4F25-BB7F-783CF84D9ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DEB1EB8-992E-4F25-BB7F-783CF84D9ED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B04DC16-3B17-42BD-BAB7-9A9F5E1EC639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B04DC16-3B17-42BD-BAB7-9A9F5E1EC639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B04DC16-3B17-42BD-BAB7-9A9F5E1EC639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B04DC16-3B17-42BD-BAB7-9A9F5E1EC639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85F6328F-3869-4998-9404-AEAC751F3E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85F6328F-3869-4998-9404-AEAC751F3E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85F6328F-3869-4998-9404-AEAC751F3E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85F6328F-3869-4998-9404-AEAC751F3E42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
