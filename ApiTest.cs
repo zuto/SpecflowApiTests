@@ -11,11 +11,16 @@ namespace Specflow.ApiTests
     [Binding]
     public class SpecFlowApiTests
     {
-        public static HttpClient HttpClient { get; set; }
-        public static HttpRequestMessage HttpRequestMessage { get; set; }
-        public static HttpResponseMessage HttpResponseMessage { get; set; }
+        public static HttpClient HttpClient { get; private set; }
+        public static HttpRequestMessage HttpRequestMessage { get; private set; }
+        public static HttpResponseMessage HttpResponseMessage { get; private set; }
         private static string _urlParameters;
         private static string _urlRoute;
+
+        public static void SwapOutHttpClient(HttpClient client)
+        {
+            HttpClient = client;            
+        }
 
         [BeforeScenario("ApiTest")]
         public void BeforeApiTests()
@@ -33,16 +38,19 @@ namespace Specflow.ApiTests
         public void GivenIAmUsingTheBaseUrlFromHttpClient()
         {
             //Make sure HttpClient has been swapped out with specific instance
+            HttpRequestMessage = new HttpRequestMessage();
         }
         [Given(@"I am using the base url for (.*)")]
         public void GivenIAmUsingTheBaseUrl(string baseUrl)
         {
             HttpClient.BaseAddress = new Uri(baseUrl);
+            HttpRequestMessage = new HttpRequestMessage();
         }
         [Given(@"I am using the base url from config setting (.*)")]
         public void GivenIAmUsingTheBaseUrlFromConfigSetting(string configKey)
         {
             HttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings[configKey]);
+            HttpRequestMessage = new HttpRequestMessage();
         }
         
 
