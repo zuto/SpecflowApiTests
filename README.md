@@ -20,4 +20,15 @@ Scenario: When calling api
 	And the status code is 200
 	And the status code a success code
 	And the api response should have a content type of 
-	```
+```
+
+###Binding the Specflow.Api tests dll to your solution
+
+Add the following into the specflow config
+```
+<specFlow>
+  <stepAssemblies>
+    <stepAssembly assembly="SpecFlow.ApiTests" />
+  </stepAssemblies>
+</specFlow>
+```
