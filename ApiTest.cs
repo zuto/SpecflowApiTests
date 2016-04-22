@@ -4,6 +4,8 @@ using System.Configuration;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mime;
+using System.Reflection;
 using TechTalk.SpecFlow;
 
 namespace Specflow.ApiTests
@@ -70,8 +72,7 @@ namespace Specflow.ApiTests
             HttpRequestMessage.Content = new MultipartContent();
             foreach (var file in files.Rows[0])
             {
-                var path = file.Value;                
-                path = path.Replace(@"\BinPath\",System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase));                
+                var path = file.Value;              
                 var content = new ByteArrayContent(File.ReadAllBytes(path));
                 content.Headers.ContentDisposition = new ContentDispositionHeaderValue("File") { FileName = path };
                 ((MultipartContent) HttpRequestMessage.Content).Add(content);
