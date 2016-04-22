@@ -6,7 +6,6 @@ A set of bindings to help to test an api, without having to implement back end c
 ###Example usage
 
 ```
-<<<<<<< HEAD
 Feature: Testing the example Api
 Background:
 	Given I am using the base url from config setting ApiBaseUrl
@@ -18,7 +17,7 @@ Scenario: When calling api health endpoint
 	Then the api should return a response
 	And the status code is 200
 	```
-=======
+
 Feature: Testing an example Api
 Background: 
 	Given I am using the base url from config setting ApiBaseUrl
@@ -85,4 +84,3 @@ the api response should have a content type of {contentType}
 
 the api response should have content as string {stringContent}
 ```
->>>>>>> d2fdd348308ad6def6afac49ac88342dfe69690a
