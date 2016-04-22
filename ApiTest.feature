@@ -1,7 +1,8 @@
-﻿Feature: Testing the example Api
+﻿@Ignore
+Feature: Testing the example Api
 Background: 
 	Given I am using the base url from config setting ApiBaseUrl
-#
+
 #@ApiTest
 #Scenario: When calling api health endpoint	
 #	Given I make a GET request for /health	

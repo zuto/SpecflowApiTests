@@ -17,7 +17,8 @@ namespace Specflow.ApiTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Testing the example Api", SourceFile="ApiTest.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Testing the example Api", SourceFile="ApiTest.feature", SourceLine=1)]
+    [TechTalk.SpecRun.IgnoreAttribute()]
     public partial class TestingTheExampleApiFeature
     {
         
@@ -30,7 +31,8 @@ namespace Specflow.ApiTests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, new string[] {
+                        "Ignore"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -63,8 +65,8 @@ namespace Specflow.ApiTests
         
         public virtual void FeatureBackground()
         {
-#line 2
 #line 3
+#line 4
  testRunner.Given("I am using the base url from config setting ApiBaseUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -80,6 +82,7 @@ namespace Specflow.ApiTests
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Testing the example Api")]
+    [NUnit.Framework.IgnoreAttribute("Ignored feature")]
     public partial class TestingTheExampleApiFeature_NUnit
     {
         
@@ -92,7 +95,8 @@ namespace Specflow.ApiTests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing the example Api", null, ProgrammingLanguage.CSharp, new string[] {
+                        "Ignore"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -126,8 +130,8 @@ namespace Specflow.ApiTests
         
         public virtual void FeatureBackground()
         {
-#line 2
 #line 3
+#line 4
  testRunner.Given("I am using the base url from config setting ApiBaseUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
