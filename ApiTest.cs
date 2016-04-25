@@ -65,9 +65,15 @@ namespace Specflow.ApiTests
         }
         [Given(@"I am using the base url from config setting (.*)")]
         public void GivenIAmUsingTheBaseUrlFromConfigSetting(string configKey)
-        {
+        {            
             HttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings[configKey]);
             HttpRequestMessage = new HttpRequestMessage();
+        }        
+
+        [Given(@"I supply a default request header (.*) with value (.*)")]
+        public void GivenISupplyADefaultRequestHeader(string headerName, string headerValue)
+        {
+            HttpClient.DefaultRequestHeaders.Add(headerName, headerValue);
         }
 
 
@@ -127,9 +133,22 @@ namespace Specflow.ApiTests
         {
             HttpRequestMessage.RequestUri = new Uri(_urlRoute + _urlParameters, UriKind.Relative);
             HttpResponseMessage = HttpClient.SendAsync(HttpRequestMessage).Result;
-            Console.WriteLine(HttpRequestMessage);
-            Console.WriteLine(HttpResponseMessage);
-
+            try
+            {
+                Console.WriteLine(HttpRequestMessage);
+                Console.WriteLine(HttpRequestMessage.Content.ReadAsStringAsync().Result);
+            }
+            catch
+            {
+            }
+            try
+            {
+                Console.WriteLine(HttpResponseMessage);
+                Console.WriteLine(HttpResponseMessage.Content.ReadAsStringAsync().Result);
+            }
+            catch
+            {
+            }
         }
         [Then(@"the api should return a response")]
         public void ThenTheApiShouldReturnAResponse()
