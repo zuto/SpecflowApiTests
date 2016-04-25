@@ -89,7 +89,7 @@ namespace Specflow.ApiTests
         {
             HttpRequestMessage.Headers.Add(headerName, headerValue);
         }
-        [Given(@"I supply a request content header {headerName} with value {headerValue}")]
+        [Given(@"I supply a request content header (.*) with value (.*)")]
         public void GivenISupplyARequestContentHeaderWithValue(string headerName, string headerValue)
         {
             HttpRequestMessage.Content.Headers.Add(headerName, headerValue);
