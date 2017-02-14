@@ -5,8 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text;
 using TechTalk.SpecFlow;
 
 namespace Specflow.ApiTests
@@ -31,16 +30,15 @@ namespace Specflow.ApiTests
         public static HttpClient HttpClient { get; private set; }
         public static HttpRequestMessage HttpRequestMessage { get; private set; }
         public static HttpResponseMessage HttpResponseMessage { get; private set; }
-        private static string _urlParameters;
-        private static string _urlRoute;
-
+        private static string _resource;
+        
         public static void SwapOutHttpClient(HttpClient client)
         {
             HttpClient = client;
         }
 
-        [BeforeScenario("ApiTest")]
-        public void BeforeApiTests()
+        [BeforeScenario]
+        public void Before()
         {
             if (HttpClient == null)
                 HttpClient = new HttpClient();
@@ -55,84 +53,80 @@ namespace Specflow.ApiTests
         public void GivenIAmUsingTheBaseUrlFromHttpClient()
         {
             //Make sure HttpClient has been swapped out with specific instance
-            HttpRequestMessage = new HttpRequestMessage();
         }
-        [Given(@"I am using the base url for (.*)")]
+        [Given(@"I am using the base url `(.*)`")]
         public void GivenIAmUsingTheBaseUrl(string baseUrl)
         {
             HttpClient.BaseAddress = new Uri(baseUrl);
-            HttpRequestMessage = new HttpRequestMessage();
         }
-        [Given(@"I am using the base url from config setting (.*)")]
+        [Given(@"I am using the base url from config setting `(.*)`")]
         public void GivenIAmUsingTheBaseUrlFromConfigSetting(string configKey)
         {            
-            HttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings[configKey]);
-            HttpRequestMessage = new HttpRequestMessage();
+            var baseUrl = ConfigurationManager.AppSettings[configKey];
+            GivenIAmUsingTheBaseUrl(baseUrl);
         }        
 
-        [Given(@"I supply a default request header (.*) with value (.*)")]
+        [Given(@"I set default header `(.*)` with value `(.*)`")]
         public void GivenISupplyADefaultRequestHeader(string headerName, string headerValue)
         {
             HttpClient.DefaultRequestHeaders.Add(headerName, headerValue);
         }
 
-
-        [Given(@"I make a (.*) request with url parameters for (.*)")]
-        public void GivenIMakeARequestWithUrlParametersFor(string verb, string path, Table table)
+        [Given(@"I setup the request to (.*) for resource `(.*)`")]
+        public void GivenIMakeARequestForResource(string verb, string path)
         {
+            HttpRequestMessage = new HttpRequestMessage();
             HttpRequestMessage.Method = new HttpMethod(verb);
-            var @params = "?";
-            foreach (var keyValuePair in table.Rows[0])
-            {
-                @params += keyValuePair.Key + "=" + keyValuePair.Value + "&";
-            }
-            @params = @params.Remove(@params.Length - 1);
-            _urlParameters = @params;
-            _urlRoute = path;
+            _resource = path;
         }
-        [Given(@"I supply a request header (.*) with value (.*)")]
+
+
+
+
+
+        [Given(@"I set header `(.*)` with value `(.*)`")]
         public void GivenISupplyARequestHeaderWithValue(string headerName, string headerValue)
         {
             HttpRequestMessage.Headers.Add(headerName, headerValue);
         }
-        [Given(@"I supply a request content header (.*) with value (.*)")]
-        public void GivenISupplyARequestContentHeaderWithValue(string headerName, string headerValue)
+
+        [Given(@"I set the request content with Json")]
+        public void GivenISetTheRequestContentTypeWithJson(string content)
         {
-            HttpRequestMessage.Content.Headers.Add(headerName, headerValue);
+            GivenISetTheRequestContentAs("application/json", content);
         }
 
-        [Given(@"I set the request content type with StringContent to (.*)")]
-        public void GivenISetTheRequestContentTypeWithStringContentToValue(string value)
+        [Given(@"I set the request content as `(.*)`")]
+        public void GivenISetTheRequestContentAs(string contentType, string content)
         {
-            HttpRequestMessage.Content = new StringContent(value);
+            HttpRequestMessage.Content = new StringContent(content, Encoding.UTF8, contentType);
         }
 
-        [Given(@"I set the request content type with MultipartContent and files")]
-        public void GivenISetTheRequestContentTypeToSomething(Table files)
-        {
-            HttpRequestMessage.Content = new MultipartContent();
-            foreach (var file in files.Rows[0])
-            {
-                var path = file.Value;
-                var content = new ByteArrayContent(File.ReadAllBytes(path));
-                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("File") { FileName = path };
-                ((MultipartContent)HttpRequestMessage.Content).Add(content);
-            }
-        }
+        //[Given(@"I set the request content type with MultipartContent and files")]
+        //public void GivenISetTheRequestContentTypeWithMultipart(Table files)
+        //{
+        //    HttpRequestMessage.Content = new MultipartContent();
+        //    foreach (var file in files.Rows[0])
+        //    {
+        //        var path = file.Value;
+        //        var content = new ByteArrayContent(File.ReadAllBytes(path));
+        //        content.Headers.ContentDisposition = new ContentDispositionHeaderValue("File") { FileName = path };
+        //        ((MultipartContent)HttpRequestMessage.Content).Add(content);
+        //    }
+        //}
 
-        [Given(@"I make a (.*) request for (.*)")]
-        public void GivenIMakeARequestWithUrlParameters(string verb, string path)
+        [When(@"I send the request")]
+        public void WhenISendTheRequest()
         {
-            HttpRequestMessage.Method = new HttpMethod(verb);
-            _urlRoute = path;
-        }
-
-
-        [When(@"I call the api")]
-        public void WhenICallTheApi()
-        {
-            HttpRequestMessage.RequestUri = new Uri(_urlRoute + _urlParameters, UriKind.Relative);
+            HttpRequestMessage.RequestUri = new Uri(_resource, UriKind.Relative);
             HttpResponseMessage = HttpClient.SendAsync(HttpRequestMessage).Result;
+        }
+
+
+
+        [Then(@"I should receive a response")]
+        public void ThenIShouldReceiveAResponse()
+        {
             try
             {
                 Console.WriteLine(HttpRequestMessage);
@@ -150,48 +144,52 @@ namespace Specflow.ApiTests
             {
             }
         }
-        [Then(@"the api should return a response")]
-        public void ThenTheApiShouldReturnAResponse()
-        {
-            //nothing to do yet
-        }
-        [Then(@"the status code is (.*)")]
+
+        [Then(@"I should have a status code of (.*)")]
         public void ThenTheStatusCodeIs(int statusCode)
         {
             Assert.That((int)HttpResponseMessage.StatusCode, Is.EqualTo(statusCode));
         }
-        [Then(@"the status code a success code")]
-        public void ThenTheStatusCodeIsAStatusCode()
+        [Then(@"I should have status code that is a success code")]
+        public void ThenTheStatusCodeIsASuccessStatusCode()
         {
-            Assert.That(HttpResponseMessage.IsSuccessStatusCode);
+            Assert.IsTrue(HttpResponseMessage.IsSuccessStatusCode, "Expected successful status code");
         }
-        [Then(@"the status code is not a success code")]
-        public void ThenTheStatusCodeIsNotAStatusCode()
+        [Then(@"I should have status code that is not a success code")]
+        public void ThenTheStatusCodeIsNotASuccessStatusCode()
         {
-            Assert.That(!HttpResponseMessage.IsSuccessStatusCode);
+            Assert.IsFalse(HttpResponseMessage.IsSuccessStatusCode, "Expected non-successful status code");
         }
-        [Then(@"the api response should have a content type of (.*)")]
+
+        [Then(@"I should have a content type of `(.*)`")]
         public void ThenTheApiResponseShouldHaveAContentTypeOf(string contentType)
         {
             Assert.That(HttpResponseMessage.Content.Headers.ContentType.MediaType, Is.EqualTo(contentType));
         }
 
-        [Then(@"the api response should have content as string (.*)")]
-        public void ThenTheApiResponseShouldHaveContentAsString(string stringContent)
+        [Then(@"I should have a body matching")]
+        public void ThenTheApiResponseShouldHaveContentMatching(string match)
         {
-            Assert.That(HttpResponseMessage.Content.ReadAsStringAsync().Result, Is.EqualTo(stringContent));
+            Assert.That(HttpResponseMessage.Content.ReadAsStringAsync().Result, Is.EqualTo(match));
         }
 
-        [Then(@"the api response should have content as json with")]
-        public void ThenTheApiResponseShouldHaveContentAsJson(Table table)
+        [Then(@"I should have a body matching `(.*)`")]
+        public void ThenTheApiResponseShouldHaveContentMatchingValue(string value)
         {
-            var result = HttpResponseMessage.Content.ReadAsStringAsync().Result;
-            JObject json = JObject.Parse(result);
-            foreach (var keyValuePair in table.Rows.ElementAt(0))
-            {
-                Assert.That(json.SelectTokens(keyValuePair.Key).Count(), Is.GreaterThan(0), "Could not find json token " + keyValuePair.Key);
-                Assert.That(json.SelectTokens(keyValuePair.Key).First().ToString(), Is.EqualTo(keyValuePair.Value));
-            }
+            ThenTheApiResponseShouldHaveContentMatching(value);
         }
+
+        [Then(@"I should have header `(.*)` with value `(.*)`")]
+        public void ThenIShouldHaveHeaderWithValue(string key, string value)
+        {
+            Assert.That(HttpResponseMessage.Headers.GetValues(key).FirstOrDefault(), Is.EqualTo(value));
+        }
+
+        [Then(@"I should have content header `(.*)` with value `(.*)`")]
+        public void ThenIShouldHaveContentHeaderWithValue(string key, string value)
+        {
+            Assert.That(HttpResponseMessage.Content.Headers.GetValues(key).FirstOrDefault(), Is.EqualTo(value));
+        }
+
     }
 }
