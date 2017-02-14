@@ -14,4 +14,4 @@ Scenario: When making a get request
 	Given I setup the request to POST for resource `/`
 	When I send the request
     Then I should receive a response
-	And I should have status code that is not a success code
+	And I should have a status code of 200
