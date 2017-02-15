@@ -56,7 +56,8 @@ namespace Specflow.ApiTests
         [Given(@"I set default header `(.*)` with value `(.*)`")]
         public void GivenISupplyADefaultRequestHeader(string headerName, string headerValue)
         {
-            HttpClient.DefaultRequestHeaders.Add(headerName, headerValue);
+            if(!HttpClient.DefaultRequestHeaders.Contains(headerName))
+                HttpClient.DefaultRequestHeaders.Add(headerName, headerValue);
         }
 
         [Given(@"I setup the request to (.*) for resource `(.*)`")]
