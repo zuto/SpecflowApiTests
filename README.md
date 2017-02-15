@@ -17,27 +17,27 @@ Add the following into the specflow config
 
 Many helpers have been created to be able to assert and setup most functionality that will be needed for api testing
 
-|Tags|
-|-|
-|*TagName*|*Description*|
-|@Verbose|Outputs request and response to console|
+| Tags  | |
+| :------------ | :------------ |
+| *TagName* | *Description* |
+| @Verbose | Outputs request and response to console |
 
-| Background Given (Initial Setup) |
-| -|
+| Background Given (Initial Setup) ||
+| :------------ | :------------ |
 | *Helper* | *Description* |
 | Given I am using the base url`` `http://example.com/example` ``| Sets all requests to point to the base url specified |
 | Given I am using the base url from config setting`` `ExampleServiceUrl` ``| Sets all requests to point to the base url in the config file AppSettings |
 | Given I set default header`` `AuthKey` ``with value`` `123` ``| Sets a default request header that is applied to all requests |
    
-|Given (Setup)|
-|-|
+|Given (Setup)||
+| :------------ | :------------ |
 |Helper|Description|
 |Given I setup the request to GET for resource`` `/` ``|Creates a new request message, with verb for a resource path|
 |Given I setup the request to POST for resource`` `/example?somethingelse=1` ``| Creates a new request message, with verb for a resource path|
 |And I set header`` `AuthKey` ``with value`` `1234` ``|Adds a header into the request with key and value|
 
-|The following support multiline parameter content|
-|-|
+|The following support multiline parameter content||
+| :------------ | :------------ |
 |And I set the request content with Json |Sets the request content with json type, allowing multiline json content|
 | And I set the request content as `application/xml` | Example of setting a specific content type e.g. xml |    
 - this should be supplied with multiline parameter, e.g.
@@ -49,12 +49,12 @@ Many helpers have been created to be able to assert and setup most functionality
     """ 
 ```
 
-|When(Action)|
-|-|
+|When(Action)||
+| :------------ | :------------ |
 |When I send the request | Sends the request|
 
-|Then(Assertion)|
-|-|
+|Then(Assertion)||
+| :------------ | :------------ |
 | Then I should receive a response | No functionality, but reads better|
 | And I should have a status code of 200 | Asserts response status code match |
 | And I should have content matching`` `"Healthy"` `` | Asserts response content matching exactly| 
@@ -68,7 +68,7 @@ Many helpers have been created to be able to assert and setup most functionality
 |And I should have content header`` `Length` ``with value`` `1234` ``| Asserts response content header exists matching key and value|
     
 |The following support multiline parameter content|
-|-|
+| :------------ | :------------ |
 |And I should have a content type of`` `application/json` ``|Asserts response content-type header matches value|            
 | And I should have content matching | Asserts response content matching Exact with multiline support |
 - this should be supplied with multiline parameter, e.g.
