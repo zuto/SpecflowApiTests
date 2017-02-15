@@ -81,9 +81,6 @@ Many helpers have been created to be able to assert and setup most functionality
 ```
     
 
-```
-
-
 ### Example usage - a multistep test
 
 ```gherkin
