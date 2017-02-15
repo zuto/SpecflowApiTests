@@ -44,7 +44,7 @@ namespace Specflow.ApiTests
         [Given(@"I am using the base url `(.*)`")]
         public void GivenIAmUsingTheBaseUrl(string baseUrl)
         {
-            HttpClient.BaseAddress = new Uri(baseUrl);
+            if(HttpClient.BaseAddress == null) HttpClient.BaseAddress = new Uri(baseUrl);
         }
         [Given(@"I am using the base url from config setting `(.*)`")]
         public void GivenIAmUsingTheBaseUrlFromConfigSetting(string configKey)
