@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0CE2BFA-6466-449A-ADBD-39944DCE3E83}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Specflow.ApiTests.nuspec = Specflow.ApiTests.nuspec
 	EndProjectSection
 EndProject
 Global

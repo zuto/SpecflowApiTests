@@ -9,7 +9,7 @@
         <projectUrl>https://github.com/carloan4u/SpecflowApiTests</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Easily automate testing of apis using specflow</description>
-        <tags>azure datalake</tags>
+        <tags>specflow api tests test</tags>
     </metadata>
     <files>
         <file src="bin\Release\Specflow.ApiTests.dll" target="lib\Specflow.ApiTests.dll" />
