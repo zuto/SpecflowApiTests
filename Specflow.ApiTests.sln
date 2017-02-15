@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Specflow.ApiTests.nuspec = Specflow.ApiTests.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specflow.ApiTests", "Code\Specflow.ApiTests.csproj", "{0DEB1EB8-992E-4F25-BB7F-783CF84D9ED3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specflow.ApiTests", "Specflow.ApiTest\Specflow.ApiTests.csproj", "{0DEB1EB8-992E-4F25-BB7F-783CF84D9ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

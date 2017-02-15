@@ -105,10 +105,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Code\Specflow.ApiTests.csproj">
-      <Project>{0deb1eb8-992e-4f25-bb7f-783cf84d9ed3}</Project>
-      <Name>Specflow.ApiTests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestServer\TestServer.csproj">
       <Project>{7b04dc16-3b17-42bd-bab7-9a9f5e1ec639}</Project>
       <Name>TestServer</Name>
