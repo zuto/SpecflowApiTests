@@ -17,7 +17,8 @@ namespace Specflow.ApiTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Testing an example Api", SourceFile="ApiTest.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Testing an example Api", new string[] {
+            "Verbose"}, SourceFile="ApiTest.feature", SourceLine=2)]
     public partial class TestingAnExampleApiFeature
     {
         
@@ -30,7 +31,8 @@ namespace Specflow.ApiTest.Tests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing an example Api", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing an example Api", null, ProgrammingLanguage.CSharp, new string[] {
+                        "Verbose"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -61,81 +63,6 @@ namespace Specflow.ApiTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 2
-#line 3
- testRunner.Given("I am using the base url `http://example.com/example`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 4
- testRunner.Given("I am using the base url from config setting `ExampleServiceUrl`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 5
- testRunner.Given("I am using the base url from httpClient", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 6
- testRunner.And("I set default header `AuthKey` with value `1234`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("When making a get request", SourceLine=7)]
-        public virtual void WhenMakingAGetRequest()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When making a get request", ((string[])(null)));
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 2
-this.FeatureBackground();
-#line 9
- testRunner.Given("I setup the request to GET for resource `/`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
-    testRunner.When("I send the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
-    testRunner.Then("I should receive a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 12
- testRunner.And("I should have a status code of 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 13
- testRunner.And("I should have a body matching `\"Healthy\"`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("When making a post request", SourceLine=14)]
-        public virtual void WhenMakingAPostRequest()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When making a post request", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 2
-this.FeatureBackground();
-#line 16
-    testRunner.Given("I setup the request to POST for resource `/example?somethingelse=1`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
-    testRunner.And("I set header `AuthKey` with value `1234`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 18
- testRunner.And("I set the request content with Json", "{\r\n\"SomeContent\": true\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 24
- testRunner.And("I set the request content as `application/xml`", "<root></root>", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-    testRunner.When("I send the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 29
-    testRunner.Then("I should receive a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 30
-    testRunner.And("I should have status code that is a success code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
- testRunner.And("I should have status code that is not a success code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 32
- testRunner.And("I should have a body matching", "{\r\n\"SomeContent\": true\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
- testRunner.And("I should have header `Location` with value `/Somewhere`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
- testRunner.And("I should have content header `Length` with value `1146463`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
- testRunner.And("I should have a content type of `application/json`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
         [TechTalk.SpecRun.TestRunCleanup()]
         public virtual void TestRunCleanup()
         {
@@ -147,6 +74,7 @@ this.FeatureBackground();
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Testing an example Api")]
+    [NUnit.Framework.CategoryAttribute("Verbose")]
     public partial class TestingAnExampleApiFeature_NUnit
     {
         
@@ -159,7 +87,8 @@ this.FeatureBackground();
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing an example Api", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing an example Api", null, ProgrammingLanguage.CSharp, new string[] {
+                        "Verbose"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -189,83 +118,6 @@ this.FeatureBackground();
         public virtual void ScenarioCleanup()
         {
             testRunner.CollectScenarioErrors();
-        }
-        
-        public virtual void FeatureBackground()
-        {
-#line 2
-#line 3
- testRunner.Given("I am using the base url `http://example.com/example`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 4
- testRunner.Given("I am using the base url from config setting `ExampleServiceUrl`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 5
- testRunner.Given("I am using the base url from httpClient", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 6
- testRunner.And("I set default header `AuthKey` with value `1234`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When making a get request")]
-        public virtual void WhenMakingAGetRequest()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When making a get request", ((string[])(null)));
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 2
-this.FeatureBackground();
-#line 9
- testRunner.Given("I setup the request to GET for resource `/`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
-    testRunner.When("I send the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
-    testRunner.Then("I should receive a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 12
- testRunner.And("I should have a status code of 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 13
- testRunner.And("I should have a body matching `\"Healthy\"`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When making a post request")]
-        public virtual void WhenMakingAPostRequest()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When making a post request", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 2
-this.FeatureBackground();
-#line 16
-    testRunner.Given("I setup the request to POST for resource `/example?somethingelse=1`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
-    testRunner.And("I set header `AuthKey` with value `1234`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 18
- testRunner.And("I set the request content with Json", "{\r\n\"SomeContent\": true\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 24
- testRunner.And("I set the request content as `application/xml`", "<root></root>", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-    testRunner.When("I send the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 29
-    testRunner.Then("I should receive a response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 30
-    testRunner.And("I should have status code that is a success code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
- testRunner.And("I should have status code that is not a success code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 32
- testRunner.And("I should have a body matching", "{\r\n\"SomeContent\": true\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
- testRunner.And("I should have header `Location` with value `/Somewhere`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
- testRunner.And("I should have content header `Length` with value `1146463`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
- testRunner.And("I should have a content type of `application/json`", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
         }
     }
 }

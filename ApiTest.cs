@@ -1,29 +1,13 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using TechTalk.SpecFlow;
 
 namespace Specflow.ApiTests
-{
-    [Binding]
-    internal class SpecFlowApiSpecficTests
-    {
-        [BeforeScenario("UseTestServer")]
-        public void BeforeUseTestServer()
-        {
-        }
-
-        [AfterScenario("UseTestServer")]
-        public void AfterUseTestServer()
-        {
-        }
-    }
-
+{    
     [Binding]
     public class SpecFlowApiTests
     {
@@ -31,7 +15,8 @@ namespace Specflow.ApiTests
         public static HttpRequestMessage HttpRequestMessage { get; private set; }
         public static HttpResponseMessage HttpResponseMessage { get; private set; }
         private static string _resource;
-        
+        private static bool _verbose = false;
+
         public static void SwapOutHttpClient(HttpClient client)
         {
             HttpClient = client;
@@ -46,14 +31,16 @@ namespace Specflow.ApiTests
             if (HttpRequestMessage == null)
                 HttpRequestMessage = new HttpRequestMessage();
 
-            Console.WriteLine($"Using HttpClient with base url: {HttpClient.BaseAddress}");
+            if (_verbose)
+                Console.WriteLine($"Using HttpClient with base url: {HttpClient.BaseAddress}");
         }
 
-        [Given(@"I am using the base url from httpClient")]
-        public void GivenIAmUsingTheBaseUrlFromHttpClient()
+        [BeforeScenario("Verbose")]
+        public void BeforeVerbose()
         {
-            //Make sure HttpClient has been swapped out with specific instance
+            _verbose = true;
         }
+
         [Given(@"I am using the base url `(.*)`")]
         public void GivenIAmUsingTheBaseUrl(string baseUrl)
         {
@@ -127,21 +114,24 @@ namespace Specflow.ApiTests
         [Then(@"I should receive a response")]
         public void ThenIShouldReceiveAResponse()
         {
-            try
+            if (_verbose)
             {
-                Console.WriteLine(HttpRequestMessage);
-                Console.WriteLine(HttpRequestMessage.Content.ReadAsStringAsync().Result);
-            }
-            catch
-            {
-            }
-            try
-            {
-                Console.WriteLine(HttpResponseMessage);
-                Console.WriteLine(HttpResponseMessage.Content.ReadAsStringAsync().Result);
-            }
-            catch
-            {
+                try
+                {
+                    Console.WriteLine(HttpRequestMessage);
+                    Console.WriteLine(HttpRequestMessage.Content.ReadAsStringAsync().Result);
+                }
+                catch
+                {
+                }
+                try
+                {
+                    Console.WriteLine(HttpResponseMessage);
+                    Console.WriteLine(HttpResponseMessage.Content.ReadAsStringAsync().Result);
+                }
+                catch
+                {
+                }
             }
         }
 
@@ -167,16 +157,28 @@ namespace Specflow.ApiTests
             Assert.That(HttpResponseMessage.Content.Headers.ContentType.MediaType, Is.EqualTo(contentType));
         }
 
-        [Then(@"I should have a body matching")]
+        [Then(@"I should have content matching")]
         public void ThenTheApiResponseShouldHaveContentMatching(string match)
         {
             Assert.That(HttpResponseMessage.Content.ReadAsStringAsync().Result, Is.EqualTo(match));
         }
 
-        [Then(@"I should have a body matching `(.*)`")]
+        [Then(@"I should have content partially matching")]
+        public void ThenTheApiResponseShouldHaveContentPartiallyMatching(string match)
+        {
+            Assert.That(HttpResponseMessage.Content.ReadAsStringAsync().Result, Is.StringContaining(match));
+        }
+
+        [Then(@"I should have content matching `(.*)`")]
         public void ThenTheApiResponseShouldHaveContentMatchingValue(string value)
         {
             ThenTheApiResponseShouldHaveContentMatching(value);
+        }
+
+        [Then(@"I should have content partially matching `(.*)`")]
+        public void ThenTheApiResponseShouldHaveContentPartiallyMatchingValue(string value)
+        {
+            ThenTheApiResponseShouldHaveContentPartiallyMatching(value);
         }
 
         [Then(@"I should have header `(.*)` with value `(.*)`")]
