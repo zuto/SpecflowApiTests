@@ -83,7 +83,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Example1.feature</DependentUpon>
     </Compile>
-    <Compile Include="MySteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +105,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Specflow.ApiTests.csproj">
+    <ProjectReference Include="..\Code\Specflow.ApiTests.csproj">
       <Project>{0deb1eb8-992e-4f25-bb7f-783cf84d9ed3}</Project>
       <Name>Specflow.ApiTests</Name>
     </ProjectReference>
